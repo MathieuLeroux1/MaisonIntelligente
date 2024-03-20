@@ -1,6 +1,6 @@
 import grovepi
 import time
-import threading
+import temp
 
 class InterfaceUtilisateur:
     mode = ["Local", "Distant", "Quitter"]
