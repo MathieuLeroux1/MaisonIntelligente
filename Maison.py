@@ -1,10 +1,9 @@
 #Philippe Robichaud-Gionet et Mathieu Leroux
 import threading
-import grovepi
-
-
-lock= threading.Lock
 
 class Maison:
-    
-    pass
+    def __init__(self):
+        self.lock = threading.Lock()
+
+    def demarrer(self):
+        pass
