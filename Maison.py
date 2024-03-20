@@ -7,3 +7,7 @@ class Maison:
 
     def demarrer(self):
         pass
+
+
+maison_intelligente = Maison()
+maison_intelligente.demarrer()
