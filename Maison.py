@@ -1,5 +1,9 @@
 #Philippe Robichaud-Gionet et Mathieu Leroux
 import threading
+import Capteurs
+import Interface
+import Actions
+
 
 class Maison:
     def __init__(self):
@@ -7,7 +11,6 @@ class Maison:
 
     def demarrer(self):
         pass
-
 
 maison_intelligente = Maison()
 maison_intelligente.demarrer()
