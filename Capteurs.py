@@ -1,6 +1,7 @@
 class Capteurs:
-    def __init__(self, lock):
+    def __init__(self, lock, mode = "Local"):
         self.lock = lock
+        self.mode = mode
     
     def lire_capteurs(self):
         pass
@@ -10,3 +11,7 @@ class Capteurs:
         
     def publier_informations(self, temperature, humidite, mode):
         pass
+
+    def set_mode(self, mode):
+        self.mode = mode
+    
