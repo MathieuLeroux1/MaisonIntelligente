@@ -1,7 +1,6 @@
 import grovepi
 
 class Wet:
-
     wet = 0
     wetTarget = None
 

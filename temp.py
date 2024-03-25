@@ -2,7 +2,6 @@ import grovepi
 import time
 
 class Temp:
-
     temp = 0
     tempCible = None
     
