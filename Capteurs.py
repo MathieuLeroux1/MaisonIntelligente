@@ -1,11 +1,8 @@
 import paho.mqtt.client as mqtt
 import grovepi
-import math
 import time
 
 class Capteurs:
-
-
     def __init__(self, lock, courtier, port_courtier, sujet, mode="Local"):
         self.lock = lock
         self.mode = mode
@@ -14,8 +11,12 @@ class Capteurs:
         self.sujet = sujet
 
         self.client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, "Equipe1")
+        self.client.on_connect = self.on_connect
         self.client.connect(self.courtier, self.port_courtier)
 
+    def on_connect(self, client, userdata, flags, rc):
+        client.subscribe(self.sujet)
+    
     def lire_capteurs(self):
         with self.lock:
             temperature, humidite = grovepi.dht(7, 0) 
@@ -29,4 +30,5 @@ class Capteurs:
         self.client.publish(self.sujet, payload)
 
     def set_mode(self, mode):
-        self.mode = mode        
+        self.mode = mode
+  
