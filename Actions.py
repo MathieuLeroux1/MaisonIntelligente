@@ -46,8 +46,6 @@ class Actions:
             time.sleep(10)
             grovepi.digitalWrite(self.MoveDelGreen,0)
 
-
-
     def threadAction(self):
         if (self.CheckTemp.CompareTemp()):
             self.activer_chauffage()
