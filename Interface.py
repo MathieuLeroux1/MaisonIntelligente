@@ -1,9 +1,12 @@
 import grovepi
 import time
+<<<<<<< HEAD
 import temp
 import Wet
 import threading
 import Capteurs
+=======
+>>>>>>> c0b274ce4ea980d96c89e5be97a8631858b58fb8
 class InterfaceUtilisateur:
     modes = ["Local", "Distant", "Quitter"]
     def __init__(self, lock, bouton_pin):
