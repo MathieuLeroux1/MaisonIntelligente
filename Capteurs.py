@@ -14,6 +14,7 @@ class Capteurs:
         self.courtier = courtier
         self.port_courtier = port_courtier
         self.sujet = sujet
+        self.temperature_equipier = None
 
         self.client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, "Equipe1")
         self.client.on_connect = self.on_connect
@@ -25,8 +26,7 @@ class Capteurs:
     
     def on_message(self,client,userdata,message):
         with self.lock:
-            global temperature_equipier
-            temperature_equipier = message.payload.decode()
+            self.temperature_equipier = message.payload.decode()
             setText("Distant: Température: °C")
 
     def lire_capteurs(self):
@@ -39,7 +39,7 @@ class Capteurs:
         client.loop_start()
         while(True):
             with self.lock:
-                if(temperature_equipier == None):
+                if(self.temperature_equipier == None):
                     sleep(1)
                 else:
                     break
