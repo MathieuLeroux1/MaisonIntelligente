@@ -24,6 +24,7 @@ class Capteurs:
 
         
     def mettre_a_jour_lcd(self, temperature, humidite):
+        
         pass
         
     def publier_informations(self, temperature, humidite):

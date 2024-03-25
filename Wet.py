@@ -2,7 +2,6 @@ import grovepi
 import time
 
 class Wet:
-
     wet = 0
     wetTarget = None
 
