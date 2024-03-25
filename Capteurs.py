@@ -13,7 +13,7 @@ class Capteurs:
         self.port_courtier = port_courtier
         self.sujet = sujet
 
-        self.client = mqtt.Client("Capteurs_Client")
+        self.client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, "Equipe1")
         self.client.connect(self.courtier, self.port_courtier)
 
     def lire_capteurs(self):
