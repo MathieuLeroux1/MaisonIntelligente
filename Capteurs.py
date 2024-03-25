@@ -19,13 +19,8 @@ class Capteurs:
     
     def lire_capteurs(self):
         with self.lock:
-            if self.mode == "Local":
-                temperature, humidite = grovepi.dht(7, 0) 
-                return temperature, humidite
-            elif self.mode == "Distant":
-                pass
-            else:
-                self.client.disconnect
+            temperature, humidite = grovepi.dht() 
+            return temperature, humidite
 
         
     def mettre_a_jour_lcd(self, temperature, humidite):
