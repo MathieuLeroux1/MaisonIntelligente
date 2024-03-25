@@ -1,6 +1,5 @@
 import paho.mqtt.client as mqtt
 import grovepi
-import time
 import Temp
 import Wet
 

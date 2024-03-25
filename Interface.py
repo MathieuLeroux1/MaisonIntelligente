@@ -1,6 +1,7 @@
 import grovepi
 import time
-import temp
+import Temp
+import Wet
 
 class InterfaceUtilisateur:
     mode = ["Local", "Distant", "Quitter"]
