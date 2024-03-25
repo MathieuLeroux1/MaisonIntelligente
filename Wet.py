@@ -1,4 +1,5 @@
 import grovepi
+import time
 
 class Wet:
     wet = 0
@@ -21,6 +22,11 @@ class Wet:
     def SetWetTarget(self,NewValue):
         if (not(NewValue < 0 or NewValue > 100)):
             self.wetTarget = NewValue
+
     #Compare Humidificator desactivation
     def CompareHumidtity(self):
         self.wetTarget - self.wet == 5
+        ValStart = self.wetTarget - self.wet == 5
+        time.sleep(10)
+        ValEnd = self.wetTarget - self.wet == 5
+        return ValStart == ValEnd
