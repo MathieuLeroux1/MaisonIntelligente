@@ -56,10 +56,7 @@ class Capteurs:
             self.client.disconnect
         
     def publier_informations(self, temperature, humidite):
-        if self.mode == "Local":
-            payload = "Local: Température: {}°C, Humidité: {}%".format(temperature, humidite)
-        elif self.mode == "Distant":
-            payload = "Distant: Température: {}°C, Humidité: {}%".format(temperature, humidite)
+        payload = "Local: Température: {}°C, Humidité: {}%".format(temperature, humidite)
         self.client.publish(self.sujet, payload)
 
     def set_mode(self, mode):
