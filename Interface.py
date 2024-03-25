@@ -1,6 +1,6 @@
 import grovepi
 import time
-import temp
+import Temp
 import Wet
 import threading
 import Capteurs
@@ -54,10 +54,6 @@ class InterfaceUtilisateur:
             sensor_value = grovepi.analogRead(RotaryPin)
             degree = map(sensor_value,0,1023,0,2)
             mode_selectionne = self.modes[degree]
-
-
-            
-
 
         return temperature_cible, humidite_cible, mode_selectionne
 
