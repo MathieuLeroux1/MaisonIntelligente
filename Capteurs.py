@@ -11,7 +11,7 @@ class Capteurs:
         self.lock = lock
         self.mode = mode
         self.temp_obj = Temp()
-        self.wet_obj = Wet.Wet()
+        self.wet_obj = Wet()
         self.courtier = courtier
         self.port_courtier = port_courtier
         self.sujet = sujet
