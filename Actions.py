@@ -17,7 +17,7 @@ class Actions:
 
     def __init__(self, lock):
         self.lock = lock
-        self.CheckTemp = temp.Temp()
+        self.CheckTemp = Temp()
         self.CheckWet = Wet()
         self.ThreadAct = threading.Thread(target=self.threadAction) 
         self.ThreadAct.start()
