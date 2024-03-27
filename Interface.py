@@ -3,6 +3,7 @@ import time
 from temp import Temp
 from Wet import Wet
 import threading
+from Capteurs import Capteurs
 
 class Interface:
     modes = ["Local", "Distant", "Quitter"]
@@ -42,21 +43,18 @@ class Interface:
                 sensor_value = grovepi.analogRead(self.RotaryPin)
                 degree = map(sensor_value,0,1023,0,30)
                 self.tempe.SetTempCible(degree)
-                while not self.tempe.CompareTemp():
-                    time.sleep(1)
-                    self.tempe.SetTemp(self.tempe.GetTemp + 1)
 
         while not self.bouton_appuye():
         # Modification de l'humidité cible
             with self.lock:
-                sensor_value = grovepi.analogRead(RotaryPin)
+                sensor_value = grovepi.analogRead(self.RotaryPin)
                 degree = map(sensor_value,0,1023,0,100)
-                Wets.SetWetTarget(degree)
-                humidite_cible = degree
+                self.Wets.SetWetTarget(degree)
+                self.Wets.SetWet(degree)
                  
         while not self.bouton_appuye():
         # Sélection du mode
             with self.lock:
-                sensor_value = grovepi.analogRead(RotaryPin)
-                degree = map(sensor_value,0,1023,0,2)
-                mode_selectionne = self.modes[degree]
+                sensor_value = grovepi.analogRead(self.RotaryPin)
+                Currentmodes = map(sensor_value,0,1023,0,2)
+                Capteurs.set_mode(self.modes[Currentmodes])
