@@ -23,8 +23,8 @@ class InterfaceUtilisateur:
                 time.sleep(0.1)
 
     def changer_interface(self):
-        temperature_cible = 0 
-        humidite_cible = 0
+        temperature_cible = None 
+        humidite_cible = None
         mode_selectionne = None
         RotaryPin = 1
         tempe = Temp()
