@@ -1,4 +1,4 @@
-import Temp
+import temp
 import Wet
 import threading
 import grovepi
@@ -17,7 +17,7 @@ class Actions:
 
     def __init__(self, lock):
         self.lock = lock
-        self.CheckTemp = Temp()
+        self.CheckTemp = temp.Temp()
         self.CheckWet = Wet()
         self.ThreadAct = threading.Thread(target=self.threadAction) 
         self.ThreadAct.start()
