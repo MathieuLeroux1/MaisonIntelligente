@@ -1,6 +1,6 @@
 import paho.mqtt.client as mqtt
 import grovepi
-import Temp
+import temp
 import Wet
 import Interface
 from grove_rgb_lcd import *
@@ -10,7 +10,7 @@ class Capteurs:
     def __init__(self, lock, courtier, port_courtier, sujet, mode="Local"):
         self.lock = lock
         self.mode = mode
-        self.temp_obj = Temp.Temp()
+        self.temp_obj = temp.Temp()
         self.wet_obj = Wet.Wet()
         self.courtier = courtier
         self.port_courtier = port_courtier
