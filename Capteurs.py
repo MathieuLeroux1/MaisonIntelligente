@@ -8,9 +8,11 @@ from time import sleep
 class Capteurs:
     def __init__(self, lock, courtier, port_courtier, sujet, mode="Local"):
         self.lock = lock
+        
+        self.temp_initale = Temp()
+        self.wet_initiale = Wet()
         self.mode = mode
-        self.temp_obj = Temp()
-        self.wet_obj = Wet()
+
         self.courtier = courtier
         self.port_courtier = port_courtier
         self.sujet = sujet
@@ -27,13 +29,7 @@ class Capteurs:
     def on_message(self,client,userdata,message):
         with self.lock:
             self.temperature_equipier = message.payload.decode()
-            Temp.setText("Distant: Température: °C")
-
-    def lire_capteurs(self):
-        with self.lock:
-            temperature = self.temp_obj.GetTemp()
-            humidite = self.wet_obj.GetWet()
-            return temperature, humidite
+            Temp.setText(self.temperature_equipier)
 
     def lireValeursDistantes(self, client):
         client.loop_start()
@@ -44,17 +40,15 @@ class Capteurs:
                 else:
                     break
         client.loop_stop()
-        
-        
-    def mettre_a_jour_lcd(self, temperature, humidite):
+         
+    def mettre_a_jour_lcd(self, texte):
         with self.lock:
             if self.mode == "Local":
-                texte = "Local: Température: {}°C, Humidité: {}%".format(temperature, humidite)
                 Temp.setText(texte)
             elif self.mode == "Distant":
                 self.lireValeursDistantes(self.client)
             else:
-                self.client.disconnect
+                self.client.disconnect()
 
     def publier_informations(self, temperature, humidite):
         payload = "Local: Température: {}°C, Humidité: {}%".format(temperature, humidite)
