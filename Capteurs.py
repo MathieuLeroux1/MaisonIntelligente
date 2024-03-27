@@ -51,7 +51,7 @@ class Capteurs:
                 self.client.disconnect()
 
     def publier_informations(self, temperature, humidite):
-        payload = "Local: Température: {}°C, Humidité: {}%".format(temperature, humidite)
+        payload = "Local: Température: {}°C, Humidité: {}%, Température cible: {}°C, Humidité cible: {}%".format(temperature, humidite, Temp.GetTempCible(), Wet.GetWetTarget())
         self.client.publish(self.sujet, payload)
 
     def set_mode(self, mode):
