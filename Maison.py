@@ -19,7 +19,7 @@ class Maison:
     def demarrer(self):
         self.capteurs = Capteurs(self.lock, self.courtier, self.port_courtier, self.sujet)
         self.Actions = Actions(self.lock)
-        self.Interface = Interface(self.lock,"5")
+        self.Interface = Interface(self.lock,"5", self.capteurs)
         pass
 
 maison_intelligente = Maison()
