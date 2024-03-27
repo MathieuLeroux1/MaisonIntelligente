@@ -35,7 +35,7 @@ class InterfaceUtilisateur:
         while not self.bouton_appuye():
             pass
         
-         # Modification de la température cible
+        # Modification de la température cible
         sensor_value = grovepi.analogRead(RotaryPin)
         degree = map(sensor_value,0,1023,0,30)
         tempe.SetTempCible(degree)
@@ -54,7 +54,7 @@ class InterfaceUtilisateur:
         while not self.bouton_appuye():
             pass
         
-         # Sélection du mode
+        # Sélection du mode
         sensor_value = grovepi.analogRead(RotaryPin)
         degree = map(sensor_value,0,1023,0,2)
         mode_selectionne = self.modes[degree]
