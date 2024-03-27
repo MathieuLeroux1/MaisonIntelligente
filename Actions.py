@@ -5,7 +5,6 @@ import grovepi
 import time
 
 class Actions:
-
     tempDelRed = 3
     WetDelBlue = 4
     MoveDelGreen = 6
