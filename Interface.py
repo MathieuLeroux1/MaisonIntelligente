@@ -62,5 +62,3 @@ class Interface:
 
         while not self.bouton_appuye():
             pass
-        
-    
