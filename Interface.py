@@ -68,8 +68,9 @@ class Interface:
             degree = map(sensor_value,0,1023,0,2)
             mode_selectionne = self.modes[degree]
             
+            self.capteurs.set_mode(mode_selectionne)
+            self.capteurs.mettre_a_jour_lcd(None, None, mode_selectionne)
             
-
         while not self.bouton_appuye():
             pass
 

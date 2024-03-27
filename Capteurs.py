@@ -46,7 +46,7 @@ class Capteurs:
         client.loop_stop()
         
         
-    def mettre_a_jour_lcd(self, temperature_cible = 0, humidite_cible = 0, mode_cible = "Distant"):
+    def mettre_a_jour_lcd(self, temperature_cible = 0, humidite_cible = 0, mode_cible = "Local"):
         with self.lock:
             if self.mode == "Local":
                 texte = "Local: Température: {}°C, Humidité: {}%, Température cible: {}°C, Humidité cible: {}%, Mode: {}".format(
