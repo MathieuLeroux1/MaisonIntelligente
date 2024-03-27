@@ -10,7 +10,7 @@ class Capteurs:
     def __init__(self, lock, courtier, port_courtier, sujet, mode="Local"):
         self.lock = lock
         self.mode = mode
-        self.temp_obj = temp.Temp()
+        self.temp_obj = Temp()
         self.wet_obj = Wet.Wet()
         self.courtier = courtier
         self.port_courtier = port_courtier
