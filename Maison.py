@@ -1,8 +1,8 @@
 #Philippe Robichaud-Gionet et Mathieu Leroux
 import threading
-import Capteurs
-import Interface
-import Actions
+from Capteurs import Capteurs
+from Interface import Interface
+from Actions import Actions
 #LCD Screen:I2C-2 || Boutton:D5 || Green LED:D6 || Red LED:D3 || Blue LED:D4 || Temperature and Humidity:D2 || 
 #Rotary Angle:A1 || Light Detector:A0 || Move Detector:D7  
 

@@ -1,7 +1,7 @@
 import grovepi
 import time
-import temp
-import Wet
+from temp import Temp
+from Wet import Wet
 import threading
 
 class Interface:
@@ -27,7 +27,7 @@ class Interface:
         humidite_cible = None
         mode_selectionne = None
         RotaryPin = 1
-        tempe = temp.Temp()
+        tempe = Temp()
         Wets = Wet()
         grovepi.pinMode(RotaryPin,"INPUT")
 

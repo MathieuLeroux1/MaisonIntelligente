@@ -1,8 +1,8 @@
 import paho.mqtt.client as mqtt
 import grovepi
-import temp
-import Wet
-import Interface
+from temp import Temp
+from Wet import Wet
+from Interface import Interface
 from grove_rgb_lcd import *
 from time import sleep
 
@@ -28,7 +28,7 @@ class Capteurs:
     def on_message(self,client,userdata,message):
         with self.lock:
             self.temperature_equipier = message.payload.decode()
-            setText("Distant: Température: °C")
+            temp.setText("Distant: Température: °C")
 
     def lire_capteurs(self):
         with self.lock:

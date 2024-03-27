@@ -1,5 +1,5 @@
-import temp
-import Wet
+from temp import Temp
+from Wet import Wet
 import threading
 import grovepi
 import time
