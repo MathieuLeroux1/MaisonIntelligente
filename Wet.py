@@ -3,7 +3,7 @@ import time
 
 class Wet:
     wet = 0
-    wetTarget = None
+    wetTarget = 0
 
     def __init__(self):
         [temp,humid] = grovepi.dht(2,0)
