@@ -10,8 +10,8 @@ class Capteurs:
     def __init__(self, lock, courtier, port_courtier, sujet, mode="Local"):
         self.lock = lock
         self.mode = mode
-        self.temp_obj = Temp()
-        self.wet_obj = Wet()
+        self.temp_initale = Temp()
+        self.wet_initiale = Wet()
         self.courtier = courtier
         self.port_courtier = port_courtier
         self.sujet = sujet
@@ -32,8 +32,7 @@ class Capteurs:
 
     def lire_capteurs(self):
         with self.lock:
-            temperature = self.temp_obj.GetTemp()
-            humidite = self.wet_obj.GetWet()
+            
             return temperature, humidite
 
     def lireValeursDistantes(self, client):
@@ -47,15 +46,16 @@ class Capteurs:
         client.loop_stop()
         
         
-    def mettre_a_jour_lcd(self, temperature, humidite):
+    def mettre_a_jour_lcd(self, temperature_cible = 0, humidite_cible = 0, mode_cible = "Distant"):
         with self.lock:
             if self.mode == "Local":
-                texte = "Local: Température: {}°C, Humidité: {}%".format(temperature, humidite)
+                texte = "Local: Température: {}°C, Humidité: {}%, Température cible: {}°C, Humidité cible: {}%, Mode: {}".format(
+                    self.temp_initale.GetTemp(), self.wet_initiale.GetWet(), temperature_cible,humidite_cible , mode_cible)
                 Temp.setText(texte)
             elif self.mode == "Distant":
                 self.lireValeursDistantes(self.client)
             else:
-                self.client.disconnect
+                self.client.disconnect()
 
     def publier_informations(self, temperature, humidite):
         payload = "Local: Température: {}°C, Humidité: {}%".format(temperature, humidite)

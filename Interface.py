@@ -3,11 +3,13 @@ import time
 from temp import Temp
 from Wet import Wet
 import threading
+from Capteurs import Capteurs
 
 class Interface:
     modes = ["Local", "Distant", "Quitter"]
-    def __init__(self, lock, bouton_pin):
+    def __init__(self, lock, bouton_pin, capteurs):
         self.lock = lock
+        self.capteurs = capteurs
         with self.lock:
             self.bouton_pin = bouton_pin
             grovepi.pinMode(self.bouton_pin, "INPUT")
@@ -42,6 +44,9 @@ class Interface:
             tempe.SetTempCible(degree)
             temperature_cible = degree
 
+            self.capteurs.mettre_a_jour_lcd(tempe.GetTempCible())
+            
+
         while not self.bouton_appuye():
             pass
 
@@ -52,6 +57,7 @@ class Interface:
             Wets.SetWetTarget(degree)
             humidite_cible = degree
 
+            self.capteurs.mettre_a_jour_lcd(None, Wets.GetWetTarget())
                   
         while not self.bouton_appuye():
             pass
@@ -62,6 +68,8 @@ class Interface:
             degree = map(sensor_value,0,1023,0,2)
             mode_selectionne = self.modes[degree]
             
+            
+
         while not self.bouton_appuye():
             pass
 
