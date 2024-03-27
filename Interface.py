@@ -33,10 +33,9 @@ class Interface:
                 time.sleep(0.1)
 
     def changer_interface(self):
-        
         while not self.bouton_appuye():
             pass
-        
+
         # Modification de la température cible
         while not self.bouton_appuye():
             with self.lock:
@@ -60,4 +59,8 @@ class Interface:
             mode_selectionne = map(sensor_value,0,1023,0,2)
             self.capteurs.mettre_a_jour_lcd("Mode: {}°C".format(mode_selectionne))
             self.capteurs.set_mode(mode_selectionne)
+
+        while not self.bouton_appuye():
+            pass
+        
     
