@@ -2,7 +2,6 @@ import paho.mqtt.client as mqtt
 import grovepi
 from temp import Temp
 from Wet import Wet
-from Interface import Interface
 from grove_rgb_lcd import *
 from time import sleep
 
