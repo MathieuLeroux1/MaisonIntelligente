@@ -4,7 +4,7 @@ import Temp
 import Wet
 import threading
 
-class InterfaceUtilisateur:
+class Interface:
     modes = ["Local", "Distant", "Quitter"]
     def __init__(self, lock, bouton_pin):
         with self.lock:
