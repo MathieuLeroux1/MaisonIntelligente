@@ -25,8 +25,6 @@ class Interface:
                 time.sleep(0.1)
 
     def changer_interface(self):
-        temperature_cible = None 
-        humidite_cible = None
         mode_selectionne = None
         RotaryPin = 1
         tempe = Temp()
@@ -43,7 +41,6 @@ class Interface:
                 sensor_value = grovepi.analogRead(RotaryPin)
                 degree = map(sensor_value,0,1023,0,30)
                 tempe.SetTempCible(degree)
-                temperature_cible = degree
                 self.capteurs.mettre_a_jour_lcd("Température cible: {}°C".format(tempe.GetTempCible()))
 
         # Modification de l'humidité cible
@@ -52,7 +49,6 @@ class Interface:
                 sensor_value = grovepi.analogRead(RotaryPin)
                 degree = map(sensor_value,0,1023,0,100)
                 Wets.SetWetTarget(degree)
-                humidite_cible = degree
                 self.capteurs.mettre_a_jour_lcd("Humidité cible: {}°C".format(Wets.GetWetTarget()))
 
         # Sélection du mode
