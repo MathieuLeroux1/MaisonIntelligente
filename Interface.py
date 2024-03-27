@@ -10,9 +10,21 @@ class Interface:
         self.lock = lock
         with self.lock:
             self.bouton_pin = bouton_pin
+            #Input mode des device
+            RotaryPin = 1
+            grovepi.pinMode(RotaryPin,"INPUT")
             grovepi.pinMode(self.bouton_pin, "INPUT")
+            #Instance des objets Temp et Wet
+            self.tempe = Temp()
+            self.Wets = Wet()
+            #Mesure des valeurs température et humidité
+            [temp,humid] = grovepi.dht(2,0)
+            self.tempe.SetTemp(temp)
+            self.Wets.SetWet(humid)
+            #Création du thread et exécution du thread Interface
             self.thread = threading.Thread(target=self.changer_interface())
             self.thread.start()
+
           
     def bouton_appuye(self):
         with self.lock:
@@ -23,22 +35,14 @@ class Interface:
                 time.sleep(0.1)
 
     def changer_interface(self):
-        temperature_cible = None 
-        humidite_cible = None
-        mode_selectionne = None
-        RotaryPin = 1
-        tempe = Temp()
-        Wets = Wet()
-        grovepi.pinMode(RotaryPin,"INPUT")
 
-        #Waiting Room
         while not self.bouton_appuye():  
         # Modification de la température cible
             with self.lock:
-                sensor_value = grovepi.analogRead(RotaryPin)
+                sensor_value = grovepi.analogRead(self.RotaryPin)
                 degree = map(sensor_value,0,1023,0,30)
-                tempe.SetTempCible(degree)
-                temperature_cible = degree
+                self.tempe.SetTempCible(degree)
+                
 
         while not self.bouton_appuye():
         # Modification de l'humidité cible
@@ -54,5 +58,3 @@ class Interface:
                 sensor_value = grovepi.analogRead(RotaryPin)
                 degree = map(sensor_value,0,1023,0,2)
                 mode_selectionne = self.modes[degree]
-
-        return temperature_cible, humidite_cible, mode_selectionne
