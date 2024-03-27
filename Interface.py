@@ -7,8 +7,8 @@ import threading
 class Interface:
     modes = ["Local", "Distant", "Quitter"]
     def __init__(self, lock, bouton_pin):
+        self.lock = lock
         with self.lock:
-            self.lock = lock
             self.bouton_pin = bouton_pin
             grovepi.pinMode(self.bouton_pin, "INPUT")
             self.thread = threading.Thread(target=self.changer_interface())

@@ -3,7 +3,7 @@ import time
 
 class Temp:
     temp = 0
-    tempCible = None
+    tempCible = 0
     
     def __init__(self):
         [temp,humidity] = grovepi.dht(2,0)
