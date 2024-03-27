@@ -28,7 +28,7 @@ class Capteurs:
     def on_message(self,client,userdata,message):
         with self.lock:
             self.temperature_equipier = message.payload.decode()
-            temp.setText("Distant: Température: °C")
+            Temp.setText("Distant: Température: °C")
 
     def lire_capteurs(self):
         with self.lock:
@@ -51,7 +51,7 @@ class Capteurs:
         with self.lock:
             if self.mode == "Local":
                 texte = "Local: Température: {}°C, Humidité: {}%".format(temperature, humidite)
-                setText(texte)
+                Temp.setText(texte)
             elif self.mode == "Distant":
                 self.lireValeursDistantes(self.client)
             else:
