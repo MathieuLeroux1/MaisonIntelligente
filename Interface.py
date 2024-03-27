@@ -32,37 +32,27 @@ class Interface:
         grovepi.pinMode(RotaryPin,"INPUT")
 
         #Waiting Room
-        while not self.bouton_appuye():
-            pass
-        
+        while not self.bouton_appuye():  
         # Modification de la température cible
-        with self.lock:
-            sensor_value = grovepi.analogRead(RotaryPin)
-            degree = map(sensor_value,0,1023,0,30)
-            tempe.SetTempCible(degree)
-            temperature_cible = degree
+            with self.lock:
+                sensor_value = grovepi.analogRead(RotaryPin)
+                degree = map(sensor_value,0,1023,0,30)
+                tempe.SetTempCible(degree)
+                temperature_cible = degree
 
         while not self.bouton_appuye():
-            pass
-
         # Modification de l'humidité cible
-        with self.lock:
-            sensor_value = grovepi.analogRead(RotaryPin)
-            degree = map(sensor_value,0,1023,0,100)
-            Wets.SetWetTarget(degree)
-            humidite_cible = degree
-
-                  
+            with self.lock:
+                sensor_value = grovepi.analogRead(RotaryPin)
+                degree = map(sensor_value,0,1023,0,100)
+                Wets.SetWetTarget(degree)
+                humidite_cible = degree
+                 
         while not self.bouton_appuye():
-            pass
-        
         # Sélection du mode
-        with self.lock:
-            sensor_value = grovepi.analogRead(RotaryPin)
-            degree = map(sensor_value,0,1023,0,2)
-            mode_selectionne = self.modes[degree]
-            
-        while not self.bouton_appuye():
-            pass
+            with self.lock:
+                sensor_value = grovepi.analogRead(RotaryPin)
+                degree = map(sensor_value,0,1023,0,2)
+                mode_selectionne = self.modes[degree]
 
         return temperature_cible, humidite_cible, mode_selectionne
