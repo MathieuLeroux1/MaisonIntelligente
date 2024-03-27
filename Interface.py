@@ -18,12 +18,8 @@ class Interface:
             grovepi.pinMode(RotaryPin,"INPUT")
             grovepi.pinMode(self.bouton_pin, "INPUT")
             #Instance des objets Temp et Wet
-            self.tempe = Temp()
-            self.Wets = Wet()
-            #Mesure des valeurs température et humidité
-            [temp,humid] = grovepi.dht(2,0)
-            self.tempe.SetTemp(temp)
-            self.Wets.SetWet(humid)
+            self.tempe = self.capteurs.temp_initale
+            self.Wets = self.capteurs.wet_initiale
             #Création du thread et exécution du thread Interface
             self.thread = threading.Thread(target=self.changer_interface())
             self.thread.start()
@@ -37,7 +33,10 @@ class Interface:
                 time.sleep(0.1)
 
     def changer_interface(self):
- 
+        
+        while not self.bouton_appuye():
+            pass
+        
         # Modification de la température cible
         while not self.bouton_appuye():
             with self.lock:
