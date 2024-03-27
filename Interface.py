@@ -38,40 +38,31 @@ class Interface:
             pass
         
         # Modification de la température cible
-        with self.lock:
-            sensor_value = grovepi.analogRead(RotaryPin)
-            degree = map(sensor_value,0,1023,0,30)
-            tempe.SetTempCible(degree)
-            temperature_cible = degree
-
-            self.capteurs.mettre_a_jour_lcd(tempe.GetTempCible())
-            
-
         while not self.bouton_appuye():
-            pass
+            with self.lock:
+                sensor_value = grovepi.analogRead(RotaryPin)
+                degree = map(sensor_value,0,1023,0,30)
+                tempe.SetTempCible(degree)
+                temperature_cible = degree
+                self.capteurs.mettre_a_jour_lcd("Température cible: {}°C".format(tempe.GetTempCible()))
 
         # Modification de l'humidité cible
-        with self.lock:
-            sensor_value = grovepi.analogRead(RotaryPin)
-            degree = map(sensor_value,0,1023,0,100)
-            Wets.SetWetTarget(degree)
-            humidite_cible = degree
-
-            self.capteurs.mettre_a_jour_lcd(None, Wets.GetWetTarget())
-                  
         while not self.bouton_appuye():
-            pass
-        
+            with self.lock:
+                sensor_value = grovepi.analogRead(RotaryPin)
+                degree = map(sensor_value,0,1023,0,100)
+                Wets.SetWetTarget(degree)
+                humidite_cible = degree
+                self.capteurs.mettre_a_jour_lcd("Humidité cible: {}°C".format(Wets.GetWetTarget()))
+
         # Sélection du mode
-        with self.lock:
+        while not self.bouton_appuye():
+           with self.lock:
             sensor_value = grovepi.analogRead(RotaryPin)
             degree = map(sensor_value,0,1023,0,2)
             mode_selectionne = self.modes[degree]
-            
+            self.capteurs.mettre_a_jour_lcd("Mode: {}°C".format(mode_selectionne))
             self.capteurs.set_mode(mode_selectionne)
-            self.capteurs.mettre_a_jour_lcd(None, None, mode_selectionne)
-            
+    
         while not self.bouton_appuye():
             pass
-
-        return temperature_cible, humidite_cible, mode_selectionne
