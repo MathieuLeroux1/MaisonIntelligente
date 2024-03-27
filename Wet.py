@@ -5,9 +5,6 @@ class Wet:
     wet = 0
     wetTarget = 0
 
-    def __init__(self):
-        [temp,humid] = grovepi.dht(2,0)
-        self.wet = humid
     #GET Wet
     def GetWet(self):
         return self.wet + "%"

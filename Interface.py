@@ -42,7 +42,9 @@ class Interface:
                 sensor_value = grovepi.analogRead(self.RotaryPin)
                 degree = map(sensor_value,0,1023,0,30)
                 self.tempe.SetTempCible(degree)
-                
+                while not self.tempe.CompareTemp():
+                    time.sleep(1)
+                    self.tempe.SetTemp(self.tempe.GetTemp + 1)
 
         while not self.bouton_appuye():
         # Modification de l'humidité cible
