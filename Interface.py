@@ -74,9 +74,11 @@ class Interface:
 
     def changer_interface(self):
         # Attendre l'appui sur le bouton
-        while not self.bouton_appuye():
+        while not self.est_clique():
             pass
-
+        
+        print("Boutton Cliqué.")
+        
         # Modification de la température cible
         while not self.BtnPress("ModifTemp"):
             pass
