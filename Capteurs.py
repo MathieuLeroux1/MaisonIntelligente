@@ -59,7 +59,6 @@ class Capteurs:
         with self.lock:
             print("Salut papa")
             if self.mode == "Local":
-
                 Temp.setText(texte)
             elif self.mode == "Distant":
                 self.lireValeursDistantes(self.client)
