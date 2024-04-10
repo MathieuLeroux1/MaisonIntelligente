@@ -21,11 +21,8 @@ class Interface:
             self.tempe = self.capteurs.temp_initale
             self.Wets = self.capteurs.wet_initiale
             #Création du thread et exécution du thread Interface
-            try:
-                self.thread = threading.Thread(target=self.changer_interface())
-                self.thread.start()
-            except Exception as e:
-                print("Problème thread")
+            self.thread = threading.Thread(target=self.changer_interface())
+            self.thread.start()
          
     def bouton_appuye(self):
         with self.lock:
@@ -36,7 +33,7 @@ class Interface:
                 time.sleep(0.1)
 
     def changer_interface(self):
-        print("allo")
+        print(not self.bouton_appuye())
         # Attendre l'appui sur le bouton
         while not self.bouton_appuye():
             print("Je suis dans zone attend")
