@@ -49,6 +49,7 @@ class Capteurs:
                 self.lireValeursDistantes(self.client)
             else:
                 self.client.disconnect()
+                
 
     def publier_informations(self, temperature, humidite):
         payload = "Local: Température: {}°C, Humidité: {}%, Température cible: {}°C, Humidité cible: {}%".format(temperature, humidite, Temp.GetTempCible(), Wet.GetWetTarget())
