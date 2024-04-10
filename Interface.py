@@ -56,9 +56,9 @@ class Interface:
                 degrees = round((voltage * 300) / 5, 2)
                 degree = int(degrees / 300 * 30)
                 self.tempe.SetTempCible(degree)
+                print(type(self.capteurs).__name__)
                 #self.capteurs.mettre_a_jour_lcd("Température cible: {}°C".format(self.tempe.GetTempCible()))
                 self.capteurs.mettre_a_jour_lcd("Température cible: {}°C".format(self.tempe.GetTempCible()))
-                print(type(self.capteurs).__name__)
             elif (zone == "ModifHumid"):
                 sensor_value = grovepi.analogRead(self.RotaryPin)
                 degree = map(str(sensor_value), 0, 1023, 0, 100)
@@ -74,8 +74,8 @@ class Interface:
 
     def changer_interface(self):
         # Attendre l'appui sur le bouton
-        while not self.est_clique():
-            pass
+        #while not self.est_clique():
+            #pass
                 
         # Modification de la température cible
         while not self.BtnPress("ModifTemp"):
