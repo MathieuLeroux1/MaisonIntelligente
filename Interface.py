@@ -33,40 +33,63 @@ class Interface:
             time.sleep(0.5)
         return True
 
+    def BtnPress(self,zone):
+        with self.lock:
+            BtnPress = False
+            while not BtnPress:
+                if (grovepi.digitalRead(self.bouton_pin)):
+                    BtnPress = True
+                time.sleep(0.5)
+
+                if (zone == "ModifTemp"):
+                    sensor_value = grovepi.analogRead(self.RotaryPin)
+                    degree = map(sensor_value, 0, 1023, 0, 30)
+                    self.tempe.SetTempCible(degree)
+                    self.capteurs.mettre_a_jour_lcd("Température cible: {}°C".format(self.tempe.GetTempCible()))
+                elif (zone == "ModifHumid"):
+                    sensor_value = grovepi.analogRead(self.RotaryPin)
+                    degree = map(sensor_value, 0, 1023, 0, 100)
+                    self.Wets.SetWetTarget(degree)
+                    self.capteurs.mettre_a_jour_lcd("Humidité cible: {}°C".format(self.Wets.GetWetTarget()))
+                elif (zone == "SelectMode"):
+                    sensor_value = grovepi.analogRead(self.RotaryPin)
+                    mode_selectionne = map(sensor_value, 0, 1023, 0, 2)
+                    self.capteurs.mettre_a_jour_lcd("Mode: {}°C".format(mode_selectionne))
+                    self.capteurs.set_mode(mode_selectionne)
+
+
 
     def changer_interface(self):
         print(not(self.bouton_appuye()))
         # Attendre l'appui sur le bouton
         while not self.bouton_appuye():
-            print("Je suis dans zone attend")
             pass
 
         # Modification de la température cible
-        with self.lock:
-            while not self.bouton_appuye():
-                sensor_value = grovepi.analogRead(self.RotaryPin)
-                degree = map(sensor_value, 0, 1023, 0, 30)
-                self.tempe.SetTempCible(degree)
-                self.capteurs.mettre_a_jour_lcd("Température cible: {}°C".format(self.tempe.GetTempCible()))
-                print("Je suis dans zone temp")
+        while not self.BtnPress("ModifTemp"):
+            pass
+                #sensor_value = grovepi.analogRead(self.RotaryPin)
+                #degree = map(sensor_value, 0, 1023, 0, 30)
+                #self.tempe.SetTempCible(degree)
+                #self.capteurs.mettre_a_jour_lcd("Température cible: {}°C".format(self.tempe.GetTempCible()))
 
         # Modification de l'humidité cible
-        with self.lock:
-            while not self.bouton_appuye():
-                sensor_value = grovepi.analogRead(self.RotaryPin)
-                degree = map(sensor_value, 0, 1023, 0, 100)
-                self.Wets.SetWetTarget(degree)
-                self.capteurs.mettre_a_jour_lcd("Humidité cible: {}°C".format(self.Wets.GetWetTarget()))
-                print("Je suis dans zone temp")                
+        while not self.BtnPress("ModifHumid"):
+            pass
+                #sensor_value = grovepi.analogRead(self.RotaryPin)
+                #degree = map(sensor_value, 0, 1023, 0, 100)
+                #self.Wets.SetWetTarget(degree)
+                #self.capteurs.mettre_a_jour_lcd("Humidité cible: {}°C".format(self.Wets.GetWetTarget()))
+                #print("Je suis dans zone temp")                
 
         # Sélection du mode
-        with self.lock:
-            while not self.bouton_appuye():
-                sensor_value = grovepi.analogRead(self.RotaryPin)
-                mode_selectionne = map(sensor_value, 0, 1023, 0, 2)
-                self.capteurs.mettre_a_jour_lcd("Mode: {}°C".format(mode_selectionne))
-                self.capteurs.set_mode(mode_selectionne)
-                print("Je suis dans zone temp")                
+        while not self.BtnPress("SelectMode"):
+            pass
+                #sensor_value = grovepi.analogRead(self.RotaryPin)
+                #mode_selectionne = map(sensor_value, 0, 1023, 0, 2)
+                #self.capteurs.mettre_a_jour_lcd("Mode: {}°C".format(mode_selectionne))
+                #self.capteurs.set_mode(mode_selectionne)
+                #print("Je suis dans zone temp")                
 
         # Attendre l'appui sur le bouton pour terminer
         while not self.bouton_appuye():
