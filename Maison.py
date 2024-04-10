@@ -19,16 +19,16 @@ class Maison:
     def demarrer(self):
         try:
             self.capteurs = Capteurs(self.lock, self.courtier, self.port_courtier, self.sujet)
-        except:
-            print("Problème avec Capteurs Exception")
+        except Exception as e:
+            print(e)
         try:
             self.Actions = Actions(self.lock)
-        except:
-            print("Problème avec Action Exception")
+        except Exception as e:
+            print(e)
         try:
             self.Interface = Interface(self.lock,"5", self.capteurs)
-        except:
-            print("Problème avec Interface Exception")
+        except Exception as e:
+            print(e)
         pass
 
 maison_intelligente = Maison()
