@@ -29,6 +29,7 @@ class Interface:
         bouton_presse = False
         while not bouton_presse:
             etat_bouton = grovepi.digitalRead(self.bouton_pin)
+            print(grovepi.digitalRead(self.bouton_pin))
             if etat_bouton == 1:
                 bouton_presse = True
             time.sleep(0.5)
