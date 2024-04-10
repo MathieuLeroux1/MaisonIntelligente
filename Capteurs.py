@@ -14,7 +14,7 @@ class Capteurs:
     port_courtier = ""
     sujet = ""
     temperature_equipier = ""
-    
+
     def __init__(self, lock, courtier, port_courtier, sujet, mode="Local"):
         self.lock = lock
         self.temp_initale = Temp()
@@ -25,11 +25,14 @@ class Capteurs:
         self.sujet = sujet
         self.temperature_equipier = None
 
+        try:
 
-        self.client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, "Equipe1")
-        self.client.on_connect = self.on_connect
-        self.client.on_message = self.on_message
-        self.client.connect(self.courtier, self.port_courtier)
+            self.client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, "Equipe1")
+            self.client.on_connect = self.on_connect
+            self.client.on_message = self.on_message
+            self.client.connect(self.courtier, self.port_courtier)
+        except:
+            print("skip")
 
     def on_connect(self, client, userdata, flags, rc):
         client.subscribe(self.sujet)
