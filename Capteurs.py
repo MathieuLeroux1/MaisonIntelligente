@@ -20,7 +20,7 @@ class Capteurs:
         self.temp_initale = Temp()
         self.wet_initiale = Wet()
         
-        self.mettre_a_jour_lcd("Température: " + self.temp_initale + "; Humidité: " + self.wet_initiale)
+        self.mettre_a_jour_lcd("Température: " + self.temp_initale.GetTemp() + "; Humidité: " + self.wet_initiale.GetWet())
         
         self.mode = mode
         self.courtier = courtier
