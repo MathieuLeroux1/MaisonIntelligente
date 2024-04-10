@@ -41,6 +41,7 @@ class Interface:
             time.sleep(0.5)
 
             if (zone == "ModifTemp"):
+                print("salut")
                 sensor_value = grovepi.analogRead(self.RotaryPin)
                 degree = map(sensor_value, 0, 1023, 0, 30)
                 self.tempe.SetTempCible(degree)
