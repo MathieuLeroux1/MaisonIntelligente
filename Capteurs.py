@@ -19,6 +19,9 @@ class Capteurs:
         self.lock = lock
         self.temp_initale = Temp()
         self.wet_initiale = Wet()
+        
+        self.mettre_a_jour_lcd("Température: " + self.temp_initale + "; Humidité: " + self.wet_initiale)
+        
         self.mode = mode
         self.courtier = courtier
         self.port_courtier = port_courtier
