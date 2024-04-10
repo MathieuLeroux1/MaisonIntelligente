@@ -8,11 +8,12 @@ from time import sleep
 class Capteurs:
     def __init__(self, lock, courtier, port_courtier, sujet, mode="Local"):
         self.lock = lock
-        
-        self.temp_initale = Temp()
-        self.wet_initiale = Wet()
-        self.mode = mode
-
+        try:
+            self.temp_initale = Temp()
+            self.wet_initiale = Wet()
+            self.mode = mode
+        except:
+            print("problème avec wet et temp")
         self.courtier = courtier
         self.port_courtier = port_courtier
         self.sujet = sujet
