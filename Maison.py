@@ -26,7 +26,7 @@ class Maison:
         except Exception as e:
             print(e)
         try:
-            self.Interface = Interface(self.lock,"4", self.capteurs)
+            self.Interface = Interface(self.lock,5, self.capteurs)
         except Exception as e:
             print(e)
         pass
