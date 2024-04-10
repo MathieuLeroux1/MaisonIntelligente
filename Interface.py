@@ -10,6 +10,7 @@ class Interface:
 
     def __init__(self, lock, bouton_pin, capteurs):
         self.lock = lock
+        print(type(lock).__name__)
         self.capteurs = capteurs
         with self.lock:
             self.bouton_pin = bouton_pin
