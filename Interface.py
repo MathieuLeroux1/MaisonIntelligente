@@ -57,15 +57,19 @@ class Interface:
                 degree = int(degrees / 300 * 30)
                 self.tempe.SetTempCible(degree)
                 print(type(self.capteurs).__name__)
-                self.capteurs.mettre_a_jour_lcd("Température cible: {}°C".format(self.tempe.GetTempCible()))
+                self.capteurs.mettre_a_jour_lcd("Temperature cible: {} Celcius".format(self.tempe.GetTempCible()))
             elif (zone == "ModifHumid"):
                 sensor_value = grovepi.analogRead(self.RotaryPin)
-                degree = map(str(sensor_value), 0, 1023, 0, 100)
+                voltage = round((float)(sensor_value) * 5 / 1023, 2)
+                degrees = round((voltage * 300) / 5, 2)
+                degree = int(degrees / 300 * 100)
                 self.Wets.SetWetTarget(degree)
                 self.capteurs.mettre_a_jour_lcd("Humidité cible: {}%".format(self.Wets.GetWetTarget()))
             elif (zone == "SelectMode"):
                 sensor_value = grovepi.analogRead(self.RotaryPin)
-                mode_selectionne = map(str(sensor_value), 0, 1023, 0, 2)
+                voltage = round((float)(sensor_value) * 5 / 1023, 2)
+                degrees = round((voltage * 300) / 5, 2)
+                mode_selectionne = int(degrees / 300 * 2)
                 self.capteurs.mettre_a_jour_lcd("Mode: {}°C".format(mode_selectionne))
                 self.capteurs.set_mode(mode_selectionne)
 
