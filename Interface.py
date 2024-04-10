@@ -58,6 +58,7 @@ class Interface:
                 self.tempe.SetTempCible(degree)
                 #self.capteurs.mettre_a_jour_lcd("Température cible: {}°C".format(self.tempe.GetTempCible()))
                 self.capteurs.mettre_a_jour_lcd("Température cible: {}°C".format(self.tempe.GetTempCible()))
+                print(type(self.capteurs).__name__)
             elif (zone == "ModifHumid"):
                 sensor_value = grovepi.analogRead(self.RotaryPin)
                 degree = map(str(sensor_value), 0, 1023, 0, 100)
