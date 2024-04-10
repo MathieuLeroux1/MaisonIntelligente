@@ -55,7 +55,7 @@ class Interface:
                 try:
                     degree = map(str(sensor_value), 0, 1023, 0, 30)
                 except Exception as e:
-                    print(e)
+                    print("bug")
                 self.tempe.SetTempCible(degree)
                 self.capteurs.mettre_a_jour_lcd("Température cible: {}°C".format(self.tempe.GetTempCible()))
             elif (zone == "ModifHumid"):
