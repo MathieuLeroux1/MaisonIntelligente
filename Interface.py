@@ -25,15 +25,14 @@ class Interface:
             self.thread.start()
          
     def bouton_appuye(self):
-        with self.lock:
-            print("Entering bouton_appuye()")
-            bouton_presse = False
-            while not bouton_presse:
-                etat_bouton = grovepi.digitalRead(self.bouton_pin)
-                if etat_bouton == 1:
-                    bouton_presse = True
-            print("Exiting bouton_appuye()")
-            return True
+        print("Entering bouton_appuye()")
+        bouton_presse = False
+        while not bouton_presse:
+            etat_bouton = grovepi.digitalRead(self.bouton_pin)
+            if etat_bouton == 1:
+                bouton_presse = True
+        print("Exiting bouton_appuye()")
+        return True
 
 
     def changer_interface(self):
