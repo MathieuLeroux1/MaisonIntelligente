@@ -21,7 +21,6 @@ class Maison:
             self.capteurs = Capteurs(self.lock, self.courtier, self.port_courtier, self.sujet)
         except Exception as e:
             print(e)
-        print(type(self.capteurs).__name__)
         try:
             self.Actions = Actions(self.lock)
         except Exception as e:
