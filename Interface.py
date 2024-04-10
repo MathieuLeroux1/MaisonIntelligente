@@ -14,8 +14,8 @@ class Interface:
         with self.lock:
             self.bouton_pin = bouton_pin
             #Input mode des device
-            RotaryPin = 1
-            grovepi.pinMode(RotaryPin,"INPUT")
+            self.RotaryPin = 1
+            grovepi.pinMode(self.RotaryPin,"INPUT")
             grovepi.pinMode(self.bouton_pin, "INPUT")
             #Instance des objets Temp et Wet
             self.tempe = self.capteurs.temp_initale
