@@ -19,6 +19,7 @@ class Maison:
     def demarrer(self):
         try:
             self.capteurs = Capteurs(self.lock, self.courtier, self.port_courtier, self.sujet)
+            self.capteurs.mettre_a_jour_lcd("Salut")
         except Exception as e:
             print(e)
         try:
