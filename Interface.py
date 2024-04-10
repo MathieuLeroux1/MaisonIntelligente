@@ -34,28 +34,27 @@ class Interface:
         return True
 
     def BtnPress(self,zone):
-        with self.lock:
-            BtnPress = False
-            while not BtnPress:
-                if (grovepi.digitalRead(self.bouton_pin)):
-                    BtnPress = True
-                time.sleep(0.5)
+        BtnPress = False
+        while not BtnPress:
+            if (grovepi.digitalRead(self.bouton_pin)):
+                BtnPress = True
+            time.sleep(0.5)
 
-                if (zone == "ModifTemp"):
-                    sensor_value = grovepi.analogRead(self.RotaryPin)
-                    degree = map(sensor_value, 0, 1023, 0, 30)
-                    self.tempe.SetTempCible(degree)
-                    self.capteurs.mettre_a_jour_lcd("Température cible: {}°C".format(self.tempe.GetTempCible()))
-                elif (zone == "ModifHumid"):
-                    sensor_value = grovepi.analogRead(self.RotaryPin)
-                    degree = map(sensor_value, 0, 1023, 0, 100)
-                    self.Wets.SetWetTarget(degree)
-                    self.capteurs.mettre_a_jour_lcd("Humidité cible: {}°C".format(self.Wets.GetWetTarget()))
-                elif (zone == "SelectMode"):
-                    sensor_value = grovepi.analogRead(self.RotaryPin)
-                    mode_selectionne = map(sensor_value, 0, 1023, 0, 2)
-                    self.capteurs.mettre_a_jour_lcd("Mode: {}°C".format(mode_selectionne))
-                    self.capteurs.set_mode(mode_selectionne)
+            if (zone == "ModifTemp"):
+                sensor_value = grovepi.analogRead(self.RotaryPin)
+                degree = map(sensor_value, 0, 1023, 0, 30)
+                self.tempe.SetTempCible(degree)
+                self.capteurs.mettre_a_jour_lcd("Température cible: {}°C".format(self.tempe.GetTempCible()))
+            elif (zone == "ModifHumid"):
+                sensor_value = grovepi.analogRead(self.RotaryPin)
+                degree = map(sensor_value, 0, 1023, 0, 100)
+                self.Wets.SetWetTarget(degree)
+                self.capteurs.mettre_a_jour_lcd("Humidité cible: {}°C".format(self.Wets.GetWetTarget()))
+            elif (zone == "SelectMode"):
+                sensor_value = grovepi.analogRead(self.RotaryPin)
+                mode_selectionne = map(sensor_value, 0, 1023, 0, 2)
+                self.capteurs.mettre_a_jour_lcd("Mode: {}°C".format(mode_selectionne))
+                self.capteurs.set_mode(mode_selectionne)
 
 
 
