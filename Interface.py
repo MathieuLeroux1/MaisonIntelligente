@@ -60,7 +60,6 @@ class Interface:
 
 
     def changer_interface(self):
-        print(not(self.bouton_appuye()))
         # Attendre l'appui sur le bouton
         while not self.bouton_appuye():
             pass
