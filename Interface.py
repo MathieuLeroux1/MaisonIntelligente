@@ -32,6 +32,7 @@ class Interface:
                 etat_bouton = grovepi.digitalRead(self.bouton_pin)
                 if etat_bouton == 1:
                     bouton_presse = True
+                time.sleep(0.5)
             print("Exiting bouton_appuye()")
             return True
 
