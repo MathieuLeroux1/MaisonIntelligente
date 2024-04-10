@@ -33,6 +33,16 @@ class Interface:
             time.sleep(0.5)
         return True
 
+    def est_clique(self):
+        if grovepi.digitalRead(self.port_btn) == 0:
+            time.sleep(0.5)
+            if grovepi.digitalRead(self.port_btn) == 1:
+                time.sleep(0.5)
+                if grovepi.digitalRead(self.port_btn) == 0:
+                    return True
+        return False
+    
+    
     def BtnPress(self,zone):
         BtnPress = False
         while not BtnPress:
