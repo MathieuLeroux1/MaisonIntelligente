@@ -6,6 +6,15 @@ from grove_rgb_lcd import *
 from time import sleep
 
 class Capteurs:
+    lock = ""
+    temp_initale = ""
+    wet_initiale = ""
+    mode = ""
+    courtier = ""
+    port_courtier = ""
+    sujet = ""
+    temperature_equipier = ""
+    
     def __init__(self, lock, courtier, port_courtier, sujet, mode="Local"):
         self.lock = lock
         self.temp_initale = Temp()
