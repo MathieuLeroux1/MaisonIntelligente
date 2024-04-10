@@ -55,8 +55,11 @@ class Capteurs:
         client.loop_stop()
          
     def mettre_a_jour_lcd(self, texte):
+        print("Salut")
         with self.lock:
+            print("Salut papa")
             if self.mode == "Local":
+
                 Temp.setText(texte)
             elif self.mode == "Distant":
                 self.lireValeursDistantes(self.client)
