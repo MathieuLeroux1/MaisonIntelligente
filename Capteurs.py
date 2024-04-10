@@ -55,16 +55,12 @@ class Capteurs:
         client.loop_stop()
          
     def mettre_a_jour_lcd(self, texte):
-        print("Salut")
-        with self.lock:
-            print("Salut papa")
-            if self.mode == "Local":
-
-                Temp.setText(texte)
-            elif self.mode == "Distant":
-                self.lireValeursDistantes(self.client)
-            else:
-                self.client.disconnect()
+        if self.mode == "Local":
+            Temp.setText(texte)
+        elif self.mode == "Distant":
+            self.lireValeursDistantes(self.client)
+        else:
+            self.client.disconnect()
 
     def publier_informations(self, temperature, humidite):
         payload = "Local: Température: {}°C, Humidité: {}%, Température cible: {}°C, Humidité cible: {}%".format(temperature, humidite, Temp.GetTempCible(), Wet.GetWetTarget())
