@@ -44,10 +44,10 @@ class Interface:
                 print("salut")
                 sensor_value = grovepi.analogRead(self.RotaryPin)
                 degree = map(sensor_value, 0, 1023, 0, 30)
-                self.tempe.SetTempCible(degree)
                 try:
-                    self.capteurs.mettre_a_jour_lcd("Température cible: {}°C".format(self.tempe.GetTempCible()))
+                    self.tempe.SetTempCible(degree)
                 except Exception as e:
+                    self.capteurs.mettre_a_jour_lcd("Température cible: {}°C".format(self.tempe.GetTempCible()))
                     print("bug LCD")
             elif (zone == "ModifHumid"):
                 sensor_value = grovepi.analogRead(self.RotaryPin)
