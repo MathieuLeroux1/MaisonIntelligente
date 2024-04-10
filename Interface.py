@@ -53,19 +53,21 @@ class Interface:
             if (zone == "ModifTemp"):
                 sensor_value = grovepi.analogRead(self.RotaryPin)
                 try:
-                    degree = map(str(sensor_value), 0, 1023, 0, 30)
+                    voltage = round((float)(sensor_value) * 5 / 1023, 2)
+                    degrees = round((voltage * 300) / 5, 2)
+                    degree = int(degrees / 300 * 30)
                 except Exception as e:
                     print("bug")
                 self.tempe.SetTempCible(degree)
                 self.capteurs.mettre_a_jour_lcd("Température cible: {}°C".format(self.tempe.GetTempCible()))
             elif (zone == "ModifHumid"):
                 sensor_value = grovepi.analogRead(self.RotaryPin)
-                degree = map(sensor_value, 0, 1023, 0, 100)
+                degree = map(str(sensor_value), 0, 1023, 0, 100)
                 self.Wets.SetWetTarget(degree)
                 self.capteurs.mettre_a_jour_lcd("Humidité cible: {}°C".format(self.Wets.GetWetTarget()))
             elif (zone == "SelectMode"):
                 sensor_value = grovepi.analogRead(self.RotaryPin)
-                mode_selectionne = map(sensor_value, 0, 1023, 0, 2)
+                mode_selectionne = map(str(sensor_value), 0, 1023, 0, 2)
                 self.capteurs.mettre_a_jour_lcd("Mode: {}°C".format(mode_selectionne))
                 self.capteurs.set_mode(mode_selectionne)
 
