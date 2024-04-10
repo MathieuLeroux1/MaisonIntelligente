@@ -23,4 +23,7 @@ class Maison:
         pass
 
 maison_intelligente = Maison()
-maison_intelligente.demarrer()
+try:
+    maison_intelligente.demarrer()
+except:
+    print("Une Erreur à été déclarer")
