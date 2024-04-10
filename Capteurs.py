@@ -49,13 +49,16 @@ class Capteurs:
         client.loop_stop()
          
     def mettre_a_jour_lcd(self, texte):
-        with self.lock:
-            if self.mode == "Local":
-                Temp.setText(texte)
-            elif self.mode == "Distant":
-                self.lireValeursDistantes(self.client)
-            else:
-                self.client.disconnect()
+        try:
+            with self.lock:
+                if self.mode == "Local":
+                    Temp.setText(texte)
+                elif self.mode == "Distant":
+                    self.lireValeursDistantes(self.client)
+                else:
+                    self.client.disconnect()
+        except Exception as e:
+            print(e)
                 
 
     def publier_informations(self, temperature, humidite):
