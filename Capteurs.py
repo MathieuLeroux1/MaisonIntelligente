@@ -56,7 +56,7 @@ class Capteurs:
          
     def mettre_a_jour_lcd(self, texte):
         if self.mode == "Local":
-            grove_rgb_lcd.setText_norefresh(texte)
+            setText_norefresh(texte)
         elif self.mode == "Distant":
             self.lireValeursDistantes(self.client)
         else:
