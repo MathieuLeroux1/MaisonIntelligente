@@ -60,12 +60,12 @@ class Interface:
                 self.capteurs.mettre_a_jour_lcd("Température cible: {}°C".format(self.tempe.GetTempCible()))
             elif (zone == "ModifHumid"):
                 sensor_value = grovepi.analogRead(self.RotaryPin)
-                degree = map(sensor_value, 0, 1023, 0, 100)
+                degree = map(str(sensor_value), 0, 1023, 0, 100)
                 self.Wets.SetWetTarget(degree)
                 self.capteurs.mettre_a_jour_lcd("Humidité cible: {}°C".format(self.Wets.GetWetTarget()))
             elif (zone == "SelectMode"):
                 sensor_value = grovepi.analogRead(self.RotaryPin)
-                mode_selectionne = map(sensor_value, 0, 1023, 0, 2)
+                mode_selectionne = map(str(sensor_value), 0, 1023, 0, 2)
                 self.capteurs.mettre_a_jour_lcd("Mode: {}°C".format(mode_selectionne))
                 self.capteurs.set_mode(mode_selectionne)
 
