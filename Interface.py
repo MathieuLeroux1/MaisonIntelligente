@@ -10,7 +10,6 @@ class Interface:
 
     def __init__(self, lock, bouton_pin, capteurs):
         self.lock = lock
-        print(type(lock).__name__)
         self.capteurs = capteurs
         with self.lock:
             self.bouton_pin = bouton_pin
@@ -26,13 +25,12 @@ class Interface:
             self.thread.start()
          
     def bouton_appuye(self):
-        with self.lock:
-            print("allo")
-            while True:
-                etat_bouton = grovepi.digitalRead(self.bouton_pin)
-                if etat_bouton == 1:
-                    return True
-                time.sleep(0.1)
+
+        while True:
+            etat_bouton = grovepi.digitalRead(self.bouton_pin)
+            if etat_bouton == 1:
+                return True
+            time.sleep(0.1)
 
     def changer_interface(self):
         print(not(self.bouton_appuye()))
