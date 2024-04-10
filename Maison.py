@@ -17,10 +17,22 @@ class Maison:
         self.Interface = None
 
     def demarrer(self):
-        self.capteurs = Capteurs(self.lock, self.courtier, self.port_courtier, self.sujet)
-        self.Actions = Actions(self.lock)
-        self.Interface = Interface(self.lock,"5", self.capteurs)
+        try:
+            self.capteurs = Capteurs(self.lock, self.courtier, self.port_courtier, self.sujet)
+        except:
+            print("Problème avec Capteurs Exception")
+        try:
+            self.Actions = Actions(self.lock)
+        except:
+            print("Problème avec Action Exception")
+        try:
+            self.Interface = Interface(self.lock,"5", self.capteurs)
+        except:
+            print("Problème avec Interface Exception")
         pass
 
 maison_intelligente = Maison()
-maison_intelligente.demarrer()
+try:
+    maison_intelligente.demarrer()
+except:
+    print("Une Erreur à été déclarer")
