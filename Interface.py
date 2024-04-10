@@ -25,9 +25,9 @@ class Interface:
             self.thread.start()
          
     def bouton_appuye(self):
+        print("allo")
         with self.lock:
             while True:
-                print("allo")
                 etat_bouton = grovepi.digitalRead(self.bouton_pin)
                 if etat_bouton == 1:
                     return True
