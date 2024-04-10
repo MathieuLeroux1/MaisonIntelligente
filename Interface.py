@@ -27,6 +27,7 @@ class Interface:
     def bouton_appuye(self):
         with self.lock:
             while True:
+                print("allo")
                 etat_bouton = grovepi.digitalRead(self.bouton_pin)
                 if etat_bouton == 1:
                     return True
