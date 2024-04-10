@@ -8,21 +8,21 @@ from time import sleep
 class Capteurs:
     def __init__(self, lock, courtier, port_courtier, sujet, mode="Local"):
         self.lock = lock
-        try:
-            self.temp_initale = Temp()
-            self.wet_initiale = Wet()
-            self.mode = mode
-        except:
-            print("problème avec wet et temp")
+        self.temp_initale = Temp()
+        self.wet_initiale = Wet()
+        self.mode = mode
         self.courtier = courtier
         self.port_courtier = port_courtier
         self.sujet = sujet
         self.temperature_equipier = None
 
-        self.client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, "Equipe1")
-        self.client.on_connect = self.on_connect
-        self.client.on_message = self.on_message
-        self.client.connect(self.courtier, self.port_courtier)
+        try:
+            self.client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, "Equipe1")
+            self.client.on_connect = self.on_connect
+            self.client.on_message = self.on_message
+            self.client.connect(self.courtier, self.port_courtier)
+        except:
+            print("Problème lors de la connection de la mqtt")
 
     def on_connect(self, client, userdata, flags, rc):
         client.subscribe(self.sujet)
