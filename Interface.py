@@ -53,7 +53,7 @@ class Interface:
             if (zone == "ModifTemp"):
                 sensor_value = grovepi.analogRead(self.RotaryPin)
                 try:
-                    degree = map(sensor_value, 0, 1023, 0, 30)
+                    degree = map(str(sensor_value), 0, 1023, 0, 30)
                 except Exception as e:
                     print(e)
                 self.tempe.SetTempCible(degree)
