@@ -63,7 +63,7 @@ class Interface:
                 degree = int(degrees / 300 * 100)
                 #Set Humidity cible et print LCD
                 self.Wets.SetWetTarget(degree)
-                self.capteurs.mettre_a_jour_lcd("Humidité cible: {}%".format(self.Wets.GetWetTarget()))
+                self.capteurs.mettre_a_jour_lcd("Humidite cible: {}%".format(self.Wets.GetWetTarget()))
             elif (zone == "SelectMode"):
                 sensor_value = grovepi.analogRead(self.RotaryPin)
                 voltage = round((float)(sensor_value) * 5 / 1023, 2)
@@ -75,21 +75,21 @@ class Interface:
 
 
     def changer_interface(self):
-        self.est_clique()
+        #self.est_clique()
 
         self.BtnPress("ModifTemp")
 
-        self.est_clique()
+        #self.est_clique()
 
         self.BtnPress("ModifHumid")
 
-        self.est_clique()
+        #self.est_clique()
 
         self.BtnPress("SelectMode")
 
-        self.est_clique()
+        #self.est_clique()
 
-        self.bouton_appuye()
+        #self.bouton_appuye()
         
         """
         # Attendre l'appui sur le bouton
