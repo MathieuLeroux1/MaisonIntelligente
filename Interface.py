@@ -84,7 +84,7 @@ class Interface:
                 
         # Modification de la température cible
         while not self.BtnPress("ModifTemp"):
-            pass
+            print("Zone Temp")
                 #sensor_value = grovepi.analogRead(self.RotaryPin)
                 #degree = map(sensor_value, 0, 1023, 0, 30)
                 #self.tempe.SetTempCible(degree)
@@ -92,7 +92,7 @@ class Interface:
 
         # Modification de l'humidité cible
         while not self.BtnPress("ModifHumid"):
-            pass
+                        print("Zone Humidity")
                 #sensor_value = grovepi.analogRead(self.RotaryPin)
                 #degree = map(sensor_value, 0, 1023, 0, 100)
                 #self.Wets.SetWetTarget(degree)
@@ -101,7 +101,7 @@ class Interface:
 
         # Sélection du mode
         while not self.BtnPress("SelectMode"):
-            pass
+                        print("Zone Mode")
                 #sensor_value = grovepi.analogRead(self.RotaryPin)
                 #mode_selectionne = map(sensor_value, 0, 1023, 0, 2)
                 #self.capteurs.mettre_a_jour_lcd("Mode: {}°C".format(mode_selectionne))
