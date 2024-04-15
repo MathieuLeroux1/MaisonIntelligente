@@ -77,6 +77,18 @@ class Interface:
 
     
     def changer_interface(self):
+        step = 0
+        steps = ["ModifTemp", "ModifHumid", "SelectMode", "Quitter"]
+
+        while step < len(steps):
+            self.est_clique()
+
+            self.BtnPress(steps[step])
+
+            step += 1
+
+        
+        """
         self.est_clique()
 
         self.BtnPress("ModifTemp")
@@ -93,7 +105,7 @@ class Interface:
 
         self.bouton_appuye()
         
-        """
+        
         # Attendre l'appui sur le bouton
         #while not self.est_clique():
             #pass
