@@ -27,20 +27,20 @@ class Interface:
     def bouton_appuye(self):
         bouton_presse = False
         while not bouton_presse:
-            with self.lock:
-                etat_bouton = grovepi.digitalRead(self.bouton_pin)
+            etat_bouton = grovepi.digitalRead(self.bouton_pin)
             if etat_bouton == 1:
                 bouton_presse = True
             time.sleep(0.5)
         return True
 
     def est_clique(self):
-        while True:
-            with self.lock:
-                bouton_etat = grovepi.digitalRead(self.bouton_pin)
-            if bouton_etat == 1:
-                return True
+        while grovepi.digitalRead(self.bouton_pin) == 0:
             time.sleep(0.5)
+            while grovepi.digitalRead(self.bouton_pin) == 1:
+                time.sleep(0.5)
+                while grovepi.digitalRead(self.bouton_pin) == 0:
+                    return True
+        return False
     
     
     def BtnPress(self,zone):
@@ -127,4 +127,4 @@ class Interface:
         # Attendre l'appui sur le bouton pour terminer
         while not self.bouton_appuye():
             pass
-        """
+    """
