@@ -46,17 +46,16 @@ class Interface:
     def BtnPress(self,zone):
         while not grovepi.digitalRead(self.bouton_pin) == 1:
             time.sleep(0.5)
-            print(zone)
             if (zone == "ModifTemp"):
                 #get value rotary and translate to 0 - 30
                 sensor_value = grovepi.analogRead(self.RotaryPin)
                 voltage = round((float)(sensor_value) * 5 / 1023, 2)
                 degrees = round((voltage * 300) / 5, 2)
                 degree = int(degrees / 300 * 30)
-
                 #Set temperature cible et print LCD
                 self.tempe.SetTempCible(degree)
                 self.capteurs.mettre_a_jour_lcd("Temperature cible: {} Celcius".format(self.tempe.GetTempCible()))
+
             if (zone == "ModifHumid"):
                 #get value rotary and translate to 0 - 100
                 sensor_value = grovepi.analogRead(self.RotaryPin)
@@ -66,6 +65,7 @@ class Interface:
                 #Set Humidity cible et print LCD
                 self.Wets.SetWetTarget(degree)
                 self.capteurs.mettre_a_jour_lcd("Humidite cible: {}%".format(self.Wets.GetWetTarget()))
+
             if (zone == "SelectMode"):
                 sensor_value = grovepi.analogRead(self.RotaryPin)
                 voltage = round((float)(sensor_value) * 5 / 1023, 2)
@@ -75,20 +75,33 @@ class Interface:
                 self.capteurs.set_mode(mode_selectionne)
 
 
-    
     def changer_interface(self):
-        step = 0
-        steps = ["ModifTemp", "ModifHumid", "SelectMode", "Quitter"]
+        try:
+            while True:
+                while grovepi.digitalRead(self.bouton_pin) == 0:
+                    time.sleep(0.5)
 
-        while step < len(steps):
-            self.est_clique()
+                self.BtnPress("ModifTemp")
 
-            self.BtnPress(steps[step])
+                while grovepi.digitalRead(self.bouton_pin) == 0:
+                    time.sleep(0.5)
 
-            step += 1
+                self.BtnPress("ModifHumid")
 
-        
-        """
+                while grovepi.digitalRead(self.bouton_pin) == 0:
+                    time.sleep(0.5)
+                
+                self.BtnPress("SelectMode")
+
+                while grovepi.digitalRead(self.bouton_pin) == 0:
+                    time.sleep(0.5)
+
+                if self.bouton_appuye():
+                    break
+        except Exception as e:
+            print("An exception occurred:", error)
+    """         
+    def changer_interface(self):
         self.est_clique()
 
         self.BtnPress("ModifTemp")
@@ -105,7 +118,7 @@ class Interface:
 
         self.bouton_appuye()
         
-        
+
         # Attendre l'appui sur le bouton
         #while not self.est_clique():
             #pass
@@ -139,4 +152,5 @@ class Interface:
         # Attendre l'appui sur le bouton pour terminer
         while not self.bouton_appuye():
             pass
-    """
+
+    """ 
