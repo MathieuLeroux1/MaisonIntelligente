@@ -21,7 +21,7 @@ class Interface:
             self.tempe = self.capteurs.temp_initale
             self.Wets = self.capteurs.wet_initiale
             #Création du thread et exécution du thread Interface
-            self.thread = threading.Thread(target=self.changer_interface())
+            self.thread = threading.Thread(target=self.BtnPress())
             self.thread.start()
          
     def bouton_appuye(self):
@@ -43,44 +43,40 @@ class Interface:
         return False
     
     
-    def BtnPress(self,zone):
+    def BtnPress(self):
         while not grovepi.digitalRead(self.bouton_pin) == 1:
-            time.sleep(0.5)
-            if (zone == "ModifTemp"):
-                #get value rotary and translate to 0 - 30
-                sensor_value = grovepi.analogRead(self.RotaryPin)
-                voltage = round((float)(sensor_value) * 5 / 1023, 2)
-                degrees = round((voltage * 300) / 5, 2)
-                degree = int(degrees / 300 * 30)
-                #Set temperature cible et print LCD
-                self.tempe.SetTempCible(degree)
-                self.capteurs.mettre_a_jour_lcd("Temperature cible: {} Celcius".format(self.tempe.GetTempCible()))
+            #get value rotary and translate to 0 - 30
+            sensor_value = grovepi.analogRead(self.RotaryPin)
+            voltage = round((float)(sensor_value) * 5 / 1023, 2)
+            degrees = round((voltage * 300) / 5, 2)
+            degree = int(degrees / 300 * 30)
+            #Set temperature cible et print LCD
+            self.tempe.SetTempCible(degree)
+            self.capteurs.mettre_a_jour_lcd("Temperature cible: {} Celcius".format(self.tempe.GetTempCible()))
 
-            if (zone == "ModifHumid"):
-                #get value rotary and translate to 0 - 100
-                sensor_value = grovepi.analogRead(self.RotaryPin)
-                voltage = round((float)(sensor_value) * 5 / 1023, 2)
-                degrees = round((voltage * 300) / 5, 2)
-                degree = int(degrees / 300 * 100)
-                #Set Humidity cible et print LCD
-                self.Wets.SetWetTarget(degree)
-                self.capteurs.mettre_a_jour_lcd("Humidite cible: {}%".format(self.Wets.GetWetTarget()))
-
-            if (zone == "SelectMode"):
-                sensor_value = grovepi.analogRead(self.RotaryPin)
-                voltage = round((float)(sensor_value) * 5 / 1023, 2)
-                degrees = round((voltage * 300) / 5, 2)
-                mode_selectionne = int(degrees / 300 * 2)
-                self.capteurs.mettre_a_jour_lcd("Mode: {}°C".format(mode_selectionne))
-                self.capteurs.set_mode(mode_selectionne)
+        while not grovepi.digitalRead(self.bouton_pin) == 1:
+            #get value rotary and translate to 0 - 100
+            sensor_value = grovepi.analogRead(self.RotaryPin)
+            voltage = round((float)(sensor_value) * 5 / 1023, 2)
+            degrees = round((voltage * 300) / 5, 2)
+            degree = int(degrees / 300 * 100)
+            #Set Humidity cible et print LCD
+            self.Wets.SetWetTarget(degree)
+            self.capteurs.mettre_a_jour_lcd("Humidite cible: {}%".format(self.Wets.GetWetTarget()))
+        while not grovepi.digitalRead(self.bouton_pin) == 1:
+            sensor_value = grovepi.analogRead(self.RotaryPin)
+            voltage = round((float)(sensor_value) * 5 / 1023, 2)
+            degrees = round((voltage * 300) / 5, 2)
+            mode_selectionne = int(degrees / 300 * 2)
+            self.capteurs.mettre_a_jour_lcd("Mode: {}°C".format(mode_selectionne))
+            self.capteurs.set_mode(mode_selectionne)
 
 
     def changer_interface(self):
         try:
             self.BtnPress("ModifTemp")
             self.BtnPress("ModifHumid")                
-            self.BtnPress("SelectMode")
-                
+            self.BtnPress("SelectMode")              
         except Exception as e:
             print("An exception occurred:", e)
     """         
