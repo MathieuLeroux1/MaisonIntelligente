@@ -57,7 +57,7 @@ class Interface:
                 #Set temperature cible et print LCD
                 self.tempe.SetTempCible(degree)
                 self.capteurs.mettre_a_jour_lcd("Temperature cible: {} Celcius".format(self.tempe.GetTempCible()))
-            elif (zone == "ModifHumid"):
+            if (zone == "ModifHumid"):
                 #get value rotary and translate to 0 - 100
                 sensor_value = grovepi.analogRead(self.RotaryPin)
                 voltage = round((float)(sensor_value) * 5 / 1023, 2)
@@ -66,7 +66,7 @@ class Interface:
                 #Set Humidity cible et print LCD
                 self.Wets.SetWetTarget(degree)
                 self.capteurs.mettre_a_jour_lcd("Humidite cible: {}%".format(self.Wets.GetWetTarget()))
-            elif (zone == "SelectMode"):
+            if (zone == "SelectMode"):
                 sensor_value = grovepi.analogRead(self.RotaryPin)
                 voltage = round((float)(sensor_value) * 5 / 1023, 2)
                 degrees = round((voltage * 300) / 5, 2)
