@@ -45,6 +45,7 @@ class Interface:
     
     def BtnPress(self,zone):
         while not grovepi.digitalRead(self.bouton_pin) == 1:
+            print(zone)
             if (zone == "ModifTemp"):
                 #get value rotary and translate to 0 - 30
                 sensor_value = grovepi.analogRead(self.RotaryPin)
