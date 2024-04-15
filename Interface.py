@@ -44,7 +44,7 @@ class Interface:
     
     
     def BtnPress(self):
-        while not grovepi.digitalRead(self.bouton_pin) == 1:
+        while not grovepi.digitalRead(self.bouton_pin):
             print("Zone 1")
             #get value rotary and translate to 0 - 30
             sensor_value = grovepi.analogRead(self.RotaryPin)
