@@ -44,9 +44,7 @@ class Interface:
     
     
     def BtnPress(self,zone):
-        while not grovepi.digitalRead(self.bouton_pin) == 1:
-            time.sleep(0.5)
-
+        while not self.est_clique():
             if (zone == "ModifTemp"):
                 #get value rotary and translate to 0 - 30
                 sensor_value = grovepi.analogRead(self.RotaryPin)
@@ -57,7 +55,6 @@ class Interface:
                 #Set temperature cible et print LCD
                 self.tempe.SetTempCible(degree)
                 self.capteurs.mettre_a_jour_lcd("Temperature cible: {} Celcius".format(self.tempe.GetTempCible()))
-
             elif (zone == "ModifHumid"):
                 #get value rotary and translate to 0 - 100
                 sensor_value = grovepi.analogRead(self.RotaryPin)
@@ -74,6 +71,7 @@ class Interface:
                 mode_selectionne = int(degrees / 300 * 2)
                 self.capteurs.mettre_a_jour_lcd("Mode: {}°C".format(mode_selectionne))
                 self.capteurs.set_mode(mode_selectionne)
+        print("Sortie")
 
 
 
@@ -101,7 +99,7 @@ class Interface:
                 
         # Modification de la température cible
         while not self.BtnPress("ModifTemp"):
-            pass
+            print("Zone Temp")
                 #sensor_value = grovepi.analogRead(self.RotaryPin)
                 #degree = map(sensor_value, 0, 1023, 0, 30)
                 #self.tempe.SetTempCible(degree)
@@ -109,7 +107,7 @@ class Interface:
 
         # Modification de l'humidité cible
         while not self.BtnPress("ModifHumid"):
-            pass
+                        print("Zone Humidity")
                 #sensor_value = grovepi.analogRead(self.RotaryPin)
                 #degree = map(sensor_value, 0, 1023, 0, 100)
                 #self.Wets.SetWetTarget(degree)
@@ -118,7 +116,7 @@ class Interface:
 
         # Sélection du mode
         while not self.BtnPress("SelectMode"):
-            pass
+                        print("Zone Mode")
                 #sensor_value = grovepi.analogRead(self.RotaryPin)
                 #mode_selectionne = map(sensor_value, 0, 1023, 0, 2)
                 #self.capteurs.mettre_a_jour_lcd("Mode: {}°C".format(mode_selectionne))
