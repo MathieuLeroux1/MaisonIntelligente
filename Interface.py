@@ -34,11 +34,11 @@ class Interface:
         return True
 
     def est_clique(self):
-        if grovepi.digitalRead(self.bouton_pin) == 0:
+        while grovepi.digitalRead(self.bouton_pin) == 0:
             time.sleep(0.5)
-            if grovepi.digitalRead(self.bouton_pin) == 1:
+            while grovepi.digitalRead(self.bouton_pin) == 1:
                 time.sleep(0.5)
-                if grovepi.digitalRead(self.bouton_pin) == 0:
+                while grovepi.digitalRead(self.bouton_pin) == 0:
                     return True
         return False
     
