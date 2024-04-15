@@ -45,8 +45,7 @@ class Interface:
     
     def BtnPress(self,zone):
         while not grovepi.digitalRead(self.bouton_pin) == 1:
-            time.sleep(0.5)
-
+            print(grovepi.digitalRead(self.bouton_pin) == 1) 
             if (zone == "ModifTemp"):
                 #get value rotary and translate to 0 - 30
                 sensor_value = grovepi.analogRead(self.RotaryPin)
@@ -74,6 +73,7 @@ class Interface:
                 mode_selectionne = int(degrees / 300 * 2)
                 self.capteurs.mettre_a_jour_lcd("Mode: {}°C".format(mode_selectionne))
                 self.capteurs.set_mode(mode_selectionne)
+        print("Sortie")
 
 
 
