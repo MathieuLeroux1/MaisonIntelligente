@@ -4,6 +4,7 @@ from temp import Temp
 from Wet import Wet
 from grove_rgb_lcd import *
 from time import sleep
+import threading
 
 class Capteurs:
     lock = ""
@@ -14,6 +15,7 @@ class Capteurs:
     port_courtier = ""
     sujet = ""
     temperature_equipier = ""
+    thread = ""
 
     def __init__(self, lock, courtier, port_courtier, sujet, mode="Local"):
         self.lock = lock
@@ -27,7 +29,7 @@ class Capteurs:
         self.port_courtier = port_courtier
         self.sujet = sujet
         self.temperature_equipier = None
-
+        self.thread = threading.Thread(target=self.publier_informations())
         try:
             self.client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, "Equipe1")
             self.client.on_connect = self.on_connect
@@ -56,7 +58,7 @@ class Capteurs:
          
     def mettre_a_jour_lcd(self, texte):
         if self.mode == "Local":
-            setText_norefresh(texte)
+            setText_norefresh(texte) # type: ignore
         elif self.mode == "Distant":
             self.lireValeursDistantes(self.client)
         else:
