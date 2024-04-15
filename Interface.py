@@ -75,21 +75,21 @@ class Interface:
 
 
     def changer_interface(self):
-        #self.est_clique()
+        self.est_clique()
 
         self.BtnPress("ModifTemp")
 
-        #self.est_clique()
+        self.est_clique()
 
         self.BtnPress("ModifHumid")
 
-        #self.est_clique()
+        self.est_clique()
 
         self.BtnPress("SelectMode")
 
-        #self.est_clique()
+        self.est_clique()
 
-        #self.bouton_appuye()
+        self.bouton_appuye()
         
         """
         # Attendre l'appui sur le bouton
