@@ -56,7 +56,7 @@ class Interface:
                 self.tempe.SetTempCible(degree)
                 self.capteurs.mettre_a_jour_lcd("Temperature cible: {} Celcius".format(self.tempe.GetTempCible()))
 
-            while not grovepi.digitalRead(self.bouton_pin) == 1:
+            while not grovepi.digitalRead(self.bouton_pin):
                 print("Zone 2")
                 #get value rotary and translate to 0 - 100
                 sensor_value = grovepi.analogRead(self.RotaryPin)
@@ -66,7 +66,8 @@ class Interface:
                 #Set Humidity cible et print LCD
                 self.Wets.SetWetTarget(degree)
                 self.capteurs.mettre_a_jour_lcd("Humidite cible: {}%".format(self.Wets.GetWetTarget()))
-            while not grovepi.digitalRead(self.bouton_pin) == 1:
+
+            while not grovepi.digitalRead(self.bouton_pin):
                 print("Zone 3")
                 sensor_value = grovepi.analogRead(self.RotaryPin)
                 voltage = round((float)(sensor_value) * 5 / 1023, 2)
