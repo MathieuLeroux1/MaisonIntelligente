@@ -77,29 +77,12 @@ class Interface:
 
     def changer_interface(self):
         try:
-            while True:
-                while grovepi.digitalRead(self.bouton_pin) == 0:
-                    time.sleep(0.5)
-
-                self.BtnPress("ModifTemp")
-
-                while grovepi.digitalRead(self.bouton_pin) == 0:
-                    time.sleep(0.5)
-
-                self.BtnPress("ModifHumid")
-
-                while grovepi.digitalRead(self.bouton_pin) == 0:
-                    time.sleep(0.5)
+            self.BtnPress("ModifTemp")
+            self.BtnPress("ModifHumid")                
+            self.BtnPress("SelectMode")
                 
-                self.BtnPress("SelectMode")
-
-                while grovepi.digitalRead(self.bouton_pin) == 0:
-                    time.sleep(0.5)
-
-                if self.bouton_appuye():
-                    break
         except Exception as e:
-            print("An exception occurred:", error)
+            print("An exception occurred:", e)
     """         
     def changer_interface(self):
         self.est_clique()
