@@ -55,7 +55,7 @@ class Interface:
                 #Set temperature cible et print LCD
                 self.tempe.SetTempCible(degree)
                 self.capteurs.mettre_a_jour_lcd("Temperature cible: {} Celcius".format(self.tempe.GetTempCible()))
-
+            time.sleep(0.5)
             while not grovepi.digitalRead(self.bouton_pin):
                 print("Zone 2")
                 #get value rotary and translate to 0 - 100
@@ -66,7 +66,7 @@ class Interface:
                 #Set Humidity cible et print LCD
                 self.Wets.SetWetTarget(degree)
                 self.capteurs.mettre_a_jour_lcd("Humidite cible: {}%".format(self.Wets.GetWetTarget()))
-
+            time.sleep(0.5)
             while not grovepi.digitalRead(self.bouton_pin):
                 print("Zone 3")
                 sensor_value = grovepi.analogRead(self.RotaryPin)
@@ -75,6 +75,7 @@ class Interface:
                 mode_selectionne = int(degrees / 300 * 2)
                 self.capteurs.mettre_a_jour_lcd("Mode: {}°C".format(mode_selectionne))
                 self.capteurs.set_mode(mode_selectionne)
+            time.sleep(0.5)
 
 
     def changer_interface(self):
