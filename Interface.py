@@ -75,7 +75,30 @@ class Interface:
                 self.capteurs.set_mode(mode_selectionne)
 
 
+    def changer_interface(self):
+        while True:
+            while grovepi.digitalRead(self.bouton_pin) == 0:
+                time.sleep(0.5)
 
+            self.BtnPress("ModifTemp")
+
+            while grovepi.digitalRead(self.bouton_pin) == 0:
+                time.sleep(0.5)
+
+            self.BtnPress("ModifHumid")
+
+            while grovepi.digitalRead(self.bouton_pin) == 0:
+                time.sleep(0.5)
+                
+            self.BtnPress("SelectMode")
+
+            while grovepi.digitalRead(self.bouton_pin) == 0:
+                time.sleep(0.5)
+
+            if self.bouton_appuye():
+                break
+            
+    """         
     def changer_interface(self):
         self.est_clique()
 
@@ -93,7 +116,7 @@ class Interface:
 
         self.bouton_appuye()
         
-        """
+
         # Attendre l'appui sur le bouton
         #while not self.est_clique():
             #pass
@@ -127,4 +150,5 @@ class Interface:
         # Attendre l'appui sur le bouton pour terminer
         while not self.bouton_appuye():
             pass
-        """
+
+    """ 
