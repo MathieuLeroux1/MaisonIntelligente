@@ -46,7 +46,7 @@ class Interface:
     def BtnPress(self,zone):
         BtnPress = False
         while not BtnPress:
-            if (grovepi.digitalRead(self.bouton_pin)):
+            if (grovepi.digitalRead(self.bouton_pin) == 1):
                 BtnPress = True
             time.sleep(0.5)
 
